@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Hotel Gallery</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght=300;400;500;600&family=Playfair+Display:wght=400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern Light Gold Theme Colors & Variables */
+        :root {
+            --gold: #c5a880;
+            --gold-dark: #aa8f66;
+            --dark-charcoal: #1a1a1a;
+            --light-bg: #faf7f2;
+            --white: #ffffff;
+            --transition-cinematic: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* =========================================
+           MASTER HEADER & NAVIGATION STYLES
+           ========================================= */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            background-color: var(--light-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            z-index: 900;
+        }
+
+        header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: var(--gold-dark);
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        header nav {
+            /* Absolute positioning ensures it is always perfectly dead-center */
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 40px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            color: #666; 
+            transition: var(--transition-cinematic);
+        }
+
+        /* Added font-weight: 600 to perfectly match the active 'ROOMS' state in your screenshot */
+        header nav a:hover, header nav a.active {
+            color: var(--gold-dark);
+            font-weight: 600; 
+        }
+
+        .three-dots-btn {
+            font-size: 28px;
+            color: var(--gold-dark);
+            cursor: pointer;
+            font-weight: bold;
+            line-height: 1;
+            padding-bottom: 8px;
+        }
+
+        /* =========================================
+           MOBILE SIDEBAR MENU STYLES
+           ========================================= */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .sidebar-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .slide-bar {
+            position: fixed;
+            top: 0; right: -350px; width: 320px; height: 100vh;
+            background-color: var(--light-bg);
+            z-index: 1001;
+            padding: 50px 40px;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .slide-bar.active {
+            right: 0;
+        }
+
+        .close-sidebar-btn {
+            position: absolute;
+            top: 25px; right: 30px;
+            font-size: 35px;
+            color: var(--dark-charcoal);
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .slide-bar h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold-dark);
+            margin-top: 0;
+            margin-bottom: 40px;
+            font-size: 24px;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .sidebar-nav a {
+            text-decoration: none;
+            color: var(--dark-charcoal);
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: var(--transition-cinematic);
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active-side {
+            color: var(--gold-dark);
+            font-weight: 500;
+        }
+
+        .sidebar-contact-info {
+            margin-top: auto;
+            border-top: 1px solid rgba(197, 168, 128, 0.3);
+            padding-top: 25px;
+        }
+
+        .sidebar-contact-info h4 {
+            color: var(--gold-dark);
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .sidebar-contact-info p {
+            font-size: 13px;
+            color: #555;
+            margin: 12px 0;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            header nav { display: none; } 
+        }
+
+        /* =========================================
+           GALLERY SECTION LAYOUT
+           ========================================= */
+        .gallery-section {
+            padding: 150px 20px 80px; 
+            text-align: center;
+        }
+
+        .gallery-title span {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .gallery-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            font-weight: 500;
+            color: var(--dark-charcoal);
+            margin-bottom: 50px;
+            letter-spacing: 0.5px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-box {
+            position: relative;
+            background: var(--white);
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            transition: var(--transition-cinematic);
+        }
+
+        .box-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            overflow: hidden;
+        }
+
+        .box-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-cinematic);
+        }
+
+        .box-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(26, 26, 26, 0.75) 100%);
+            opacity: 0.85;
+            transition: var(--transition-cinematic);
+        }
+
+        .box-info {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            padding: 35px;
+            box-sizing: border-box;
+            text-align: left;
+            transform: translateY(15px);
+            transition: var(--transition-cinematic);
+            z-index: 2;
+        }
+
+        .box-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--white);
+            margin: 0 0 10px 0;
+        }
+
+        .box-info p {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin: 0;
+            opacity: 0;
+            transition: var(--transition-cinematic);
+        }
+
+        .gallery-box:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(197, 168, 128, 0.15);
+        }
+
+        .gallery-box:hover .box-img-wrapper img { transform: scale(1.06); }
+        .gallery-box:hover .box-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0) 20%, rgba(26, 26, 26, 0.9) 100%); }
+        .gallery-box:hover .box-info { transform: translateY(0); }
+        .gallery-box:hover .box-info p { opacity: 1; }
+
+        /* =========================================
+           EXPANDED OVERLAY VIEW
+           ========================================= */
+        .category-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(26, 26, 26, 0.98);
+            z-index: 2000;
+            display: block;
+            overflow-y: auto;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            padding: 80px 0;
+            box-sizing: border-box;
+        }
+
+        .category-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .overlay-content {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            transform: translateY(40px);
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .category-overlay.active .overlay-content { transform: translateY(0); }
+
+        .overlay-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            color: var(--gold);
+            margin-bottom: 45px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .overlay-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .overlay-grid img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 3px;
+            border: 1px solid rgba(197, 168, 128, 0.25);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .category-overlay.active .overlay-grid img { opacity: 1; transform: translateY(0); }
+        .category-overlay.active .overlay-grid img:nth-child(1) { transition-delay: 0.10s; }
+        .category-overlay.active .overlay-grid img:nth-child(2) { transition-delay: 0.15s; }
+        .category-overlay.active .overlay-grid img:nth-child(3) { transition-delay: 0.20s; }
+        .category-overlay.active .overlay-grid img:nth-child(4) { transition-delay: 0.25s; }
+        .category-overlay.active .overlay-grid img:nth-child(5) { transition-delay: 0.30s; }
+        .category-overlay.active .overlay-grid img:nth-child(6) { transition-delay: 0.35s; }
+        .category-overlay.active .overlay-grid img:nth-child(7) { transition-delay: 0.40s; }
+
+        .close-btn {
+            position: fixed;
+            top: 30px; right: 40px;
+            background: none;
+            border: none;
+            color: var(--gold);
+            font-size: 50px;
+            font-weight: 200;
+            cursor: pointer;
+            transition: var(--transition-cinematic);
+            line-height: 1;
+            z-index: 2010;
+        }
+
+        .close-btn:hover { color: var(--white); transform: rotate(90deg); }
+
+        @media (max-width: 768px) {
+            .close-btn { top: 20px; right: 25px; font-size: 40px; }
+            .overlay-title { font-size: 26px; margin-bottom: 25px; }
+            .overlay-grid img { height: 260px; }
+            .category-overlay { padding: 60px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2>Grand Horizon</h2>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="gallery.html" class="active">Gallery</a>
+            <a href="booking.html">Booking</a>
+        </nav>
+        <div class="three-dots-btn" id="sidebarToggle">&#8942;</div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="slide-bar" id="slideBar">
+        <div class="close-sidebar-btn" id="sidebarClose">&times;</div>
+        <h3>Grand Horizon</h3>
+        <div class="sidebar-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="gallery.html" class="active-side">Gallery</a>
+            <a href="booking.html">Booking</a>
+            <a href="login.html" style="color: var(--gold-dark); font-weight: bold; margin-top: 10px;">Login / Register</a>
+        </div>
+        <div class="sidebar-contact-info">
+            <h4>Contact Concierge</h4>
+            <p><span>📍</span> Golden Coast Blvd, Suite 777</p>
+            <p><span>📞</span> +1 (800) 555-HORIZON</p>
+            <p><span>✉️</span> concierge@grandhorizon.com</p>
+        </div>
+    </div>
+
+    <section class="gallery-section">
+        <div class="gallery-title">
+            <span>Our Curated Spaces</span>
+            <h2>Discover The Estate</h2>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-box" data-category="rooms">
+                <div class="box-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" alt="Rooms & Suites">
+                    <div class="box-overlay"></div>
+                </div>
+                <div class="box-info">
+                    <h3>Rooms & Suites</h3>
+                    <p>Explore Collection</p>
+                </div>
+            </div>
+
+            <div class="gallery-box" data-category="dining">
+                <div class="box-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Fine Dining">
+                    <div class="box-overlay"></div>
+                </div>
+                <div class="box-info">
+                    <h3>Fine Dining</h3>
+                    <p>Explore Collection</p>
+                </div>
+            </div>
+
+            <div class="gallery-box" data-category="wellness">
+                <div class="box-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80" alt="Wellness & Spa">
+                    <div class="box-overlay"></div>
+                </div>
+                <div class="box-info">
+                    <h3>Wellness & Spa</h3>
+                    <p>Explore Collection</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="category-overlay" id="categoryOverlay">
+        <button class="close-btn" aria-label="Close Gallery View">&times;</button>
+        <div class="overlay-content">
+            <h2 class="overlay-title" id="overlayTitle">Category Selected</h2>
+            <div class="overlay-grid" id="overlayGrid"></div>
+        </div>
+    </div>
+
+    <script>
+        // =========================================
+        // SIDEBAR NAVIGATION LOGIC
+        // =========================================
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarClose = document.getElementById('sidebarClose');
+        const slideBar = document.getElementById('slideBar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        if(sidebarToggle && sidebarClose && slideBar && sidebarOverlay) {
+            sidebarToggle.addEventListener('click', () => {
+                slideBar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+            });
+
+            const closeSidebarMenu = () => {
+                slideBar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            };
+
+            sidebarClose.addEventListener('click', closeSidebarMenu);
+            sidebarOverlay.addEventListener('click', closeSidebarMenu);
+        }
+
+        // =========================================
+        // GALLERY OVERLAY LOGIC
+        // =========================================
+        const categoryImages = {
+            rooms: [
+                "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=600&q=80"
+            ],
+            dining: [
+                "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80"
+            ],
+            wellness: [
+                "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1531973968078-9bb02785f13d?auto=format&fit=crop&w=600&q=80"
+            ]
+        };
+
+        const boxes = document.querySelectorAll('.gallery-box');
+        const overlay = document.getElementById('categoryOverlay');
+        const overlayTitle = document.getElementById('overlayTitle');
+        const overlayGrid = document.getElementById('overlayGrid');
+        const closeBtn = document.querySelector('.close-btn');
+
+        boxes.forEach(box => {
+            box.addEventListener('click', () => {
+                const category = box.getAttribute('data-category');
+                const titleText = box.querySelector('h3').innerText;
+                
+                overlayTitle.innerText = titleText;
+                overlayGrid.innerHTML = ''; 
+                
+                if (categoryImages[category]) {
+                    categoryImages[category].forEach(url => {
+                        const img = document.createElement('img');
+                        img.src = url;
+                        img.alt = `${titleText} Collection`;
+                        overlayGrid.appendChild(img);
+                    });
+                }
+                
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; 
+            });
+        });
+
+        const closeGalleryOverlay = () => {
+            overlay.classList.remove('active');
+            document.body.style.overflow = ''; 
+        };
+
+        closeBtn.addEventListener('click', closeGalleryOverlay);
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                closeGalleryOverlay();
+            }
+        });
+    </script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a453b418642321d48551a6c/1jsf6uut1';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>

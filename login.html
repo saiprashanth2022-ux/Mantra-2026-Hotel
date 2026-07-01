@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Access your exclusive membership account at Grand Horizon Hotel. Authenticate using email or phone number.">
+
+    <meta name="keywords" content="hotel account login, member register, grand horizon concierge access">
+
+    <title>Grand Horizon Hotel | Membership Portal</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+
+
+    <header>
+
+        <h2>Grand Horizon</h2>
+
+        <nav>
+
+            <a href="index.html">Home</a>
+
+            <a href="about.html">About</a>
+
+            <a href="rooms.html">Rooms</a>
+
+            <a href="gallery.html">Gallery</a>
+
+            <a href="booking.html">Booking</a>
+
+        </nav>
+
+        <div class="three-dots-btn" id="sidebarToggle">&#8942;</div>
+
+    </header>
+
+
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="slide-bar" id="slideBar">
+
+        <div class="close-sidebar-btn" id="sidebarClose">&times;</div>
+
+        <h3>Grand Horizon</h3>
+
+        <div class="sidebar-nav">
+
+            <a href="index.html">Home</a>
+
+            <a href="about.html">About</a>
+
+            <a href="rooms.html">Rooms</a>
+
+            <a href="gallery.html">Gallery</a>
+
+            <a href="booking.html">Booking</a>
+
+            <a href="login.html" class="active-side sidebar-login-btn">Login / Register</a>
+
+        </div>
+
+        <div class="sidebar-contact-info">
+
+            <h4>Contact Concierge</h4>
+
+            <p><span>📍</span> Golden Coast Blvd, Suite 777</p>
+
+            <p><span>📞</span> +1 (800) 555-HORIZON</p>
+
+            <p><span>✉️</span> concierge@grandhorizon.com</p>
+
+        </div>
+
+    </div>
+
+
+
+    <section class="sub-hero">
+
+        <div class="sub-hero-content">
+
+            <h1>Membership Portal</h1>
+
+            <p>Manage your reservations, custom stays, and elite concierge privileges.</p>
+
+        </div>
+
+    </section>
+
+
+
+    <main class="login-section">
+
+        <div class="login-card">
+
+            <div class="login-tabs">
+
+                <button id="tabLoginBtn" class="tab-toggle active">Sign In</button>
+
+                <button id="tabRegisterBtn" class="tab-toggle">Create Account</button>
+
+            </div>
+
+
+
+            <form id="loginFormContainer" class="auth-form active">
+
+                <p class="form-subtitle">Authenticate below using either your registered Email Address or Phone Number.</p>
+
+                <div class="form-group">
+
+                    <label for="loginUserField">Email Address or Phone Number</label>
+
+                    <input type="text" id="loginUserField" placeholder="Enter email or phone number..." required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="loginPasswordField">Password</label>
+
+                    <input type="password" id="loginPasswordField" placeholder="••••••••••••" required>
+
+                </div>
+
+                <button type="submit" class="submit-booking-btn">Access Dashboard</button>
+
+            </form>
+
+
+
+            <form id="registerFormContainer" class="auth-form">
+
+                <p class="form-subtitle">Register your identity fields to become part of Grand Horizon's elite membership tier.</p>
+
+                
+
+                <div class="form-row-split">
+
+                    <div class="form-group">
+
+                        <label for="regFirstName">First Name</label>
+
+                        <input type="text" id="regFirstName" placeholder="e.g., Alexander" required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="regSurname">Surname</label>
+
+                        <input type="text" id="regSurname" placeholder="e.g., Mercer" required>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-row-split">
+
+                    <div class="form-group">
+
+                        <label for="regAge">Age</label>
+
+                        <input type="number" id="regAge" min="18" max="120" placeholder="e.g., 28" required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="regGender">Gender Orientation</label>
+
+                        <select id="regGender" required>
+
+                            <option value="" disabled selected>Select orientation...</option>
+
+                            <option value="male">Male</option>
+
+                            <option value="female">Female</option>
+
+                            <option value="nonbinary">Non-Binary</option>
+
+                            <option value="undisclosed">Prefer not to say</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="regPhone">Phone Number</label>
+
+                    <input type="tel" id="regPhone" placeholder="+1 (555) 000-0000" required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="regEmail">Email Address</label>
+
+                    <input type="email" id="regEmail" placeholder="alexander@example.com" required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="regPassword">Secure Password</label>
+
+                    <input type="password" id="regPassword" placeholder="••••••••••••" required>
+
+                </div>
+
+
+
+                <button type="submit" class="submit-booking-btn">Register Credentials</button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+
+    <footer>
+
+        <p>© 2026 Grand Horizon Hotel. All rights reserved.</p>
+
+    </footer>
+
+
+
+    <script src="js/script.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a453b418642321d48551a6c/1jsf6uut1';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+</body>
+
+</html>
+

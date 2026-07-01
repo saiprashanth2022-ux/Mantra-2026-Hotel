@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure your elite getaway at Grand Horizon Hotel. Use our premium reservation portal to book luxury suites and penthouses.">
+    <meta name="keywords" content="hotel reservation, book luxury suite, grand horizon booking portal">
+    <title>Grand Horizon Hotel | Secure Reservation</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h2>Grand Horizon</h2>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="booking.html"><b>Booking</b></a>
+        </nav>
+        <div class="three-dots-btn" id="sidebarToggle">&#8942;</div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="slide-bar" id="slideBar">
+        <div class="close-sidebar-btn" id="sidebarClose">&times;</div>
+        <h3>Grand Horizon</h3>
+        <div class="sidebar-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="booking.html" class="active-side">Booking</a>
+            <a href="login.html" class="sidebar-login-btn">Login / Register</a>
+        </div>
+        <div class="sidebar-contact-info">
+            <h4>Contact Concierge</h4>
+            <p><span>📍</span> Golden Coast Blvd, Suite 777</p>
+            <p><span>📞</span> +1 (800) 555-HORIZON</p>
+            <p><span>✉️</span> concierge@grandhorizon.com</p>
+        </div>
+    </div>
+
+    <section class="sub-hero">
+        <div class="sub-hero-content">
+            <h1>Reservation Portal</h1>
+            <p>Secure your exclusive sanctuary. Your tailored experience begins here.</p>
+        </div>
+    </section>
+
+    <main class="booking-section">
+        <div class="booking-card">
+            <h2>Select Your Suite</h2>
+            <p class="form-subtitle">Please fill out your stay parameters below. Our concierge team will reach out within 2 hours.</p>
+            
+            <form id="hotelBookingForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="e.g., Alexander Mercer" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailAddress">Email Address</label>
+                    <input type="email" id="emailAddress" placeholder="alex@example.com" required>
+                </div>
+
+                <div class="form-row-split">
+                    <div class="form-group">
+                        <label for="checkIn">Check-In Date</label>
+                        <input type="date" id="checkIn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkOut">Check-Out Date</label>
+                        <input type="date" id="checkOut" required>
+                    </div>
+                </div>
+
+                <div class="form-row-split">
+                    <div class="form-group">
+                        <label for="roomType">Desired Accommodations</label>
+                        <select id="roomType" required>
+                            <option value="" disabled selected>Select an elite suite...</option>
+                            <option value="deluxe">Deluxe Ocean Suite ($350 / night)</option>
+                            <option value="signature">Grand Horizon Suite ($550 / night)</option>
+                            <option value="penthouse">Imperial Penthouse ($1,200 / night)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestCount">Total Guests</label>
+                        <select id="guestCount" required>
+                            <option value="1">1 Guest</option>
+                            <option value="2" selected>2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4+">4+ Guests</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="specialRequests">Bespoke Requests / Preferences</label>
+                    <textarea id="specialRequests" rows="4" placeholder="Dietary preferences, private airport transit requests, pillow selections..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-booking-btn">Request Reservation</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 Grand Horizon Hotel. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a453b418642321d48551a6c/1jsf6uut1';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>
