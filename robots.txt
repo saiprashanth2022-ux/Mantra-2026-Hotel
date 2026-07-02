@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://grandhorizon-hotel.netlify.app/sitemap.xml
